@@ -1,0 +1,66 @@
+syntax = "proto3";
+
+package auth;
+
+// where the generated go code should land once module is on github
+// option go_package = "github.com/Giovanni-Hernandez10/go-backend/auth-service/proto/authpb;authpb";
+// option go_package = "/proto/authpb;authpb";
+
+// // defining the rpc service with the necessary functions
+// service AuthService {
+//     rpc Signup(SignupRequest) returns (AuthResponse);
+//     rpc Login(LoginRequest) returns (LoginResponse);
+//     rpc Refresh(RefreshRequest) returns (RefreshResponse);
+//     rpc Logout(LogoutRequest) returns (AuthResponse);
+//     rpc ForgotPassword(ForgotPasswordRequest) returns (ForgotPasswordResponse);
+
+// }
+
+// // ===== Requests =====
+
+// message SignupRequest {
+//     string email = 1;
+//     string password = 2;
+//     string confirm_password = 3;
+// }
+
+// message LoginRequest {
+//     string email = 1;
+//     string password = 2;
+// }
+
+// message RefreshRequest {
+//     string refresh_token = 1;
+// }
+
+// message LogoutRequest {
+//     string refresh_token = 1;
+// }
+
+// message ForgotPasswordRequest {
+//     string email = 1;
+// }
+
+// // ===== Responses =====
+
+// // used for Signup() and Logout()
+// message AuthResponse {
+//     bool success = 1;
+// }
+
+// message LoginResponse {
+//     bool success = 1;
+//     string access_token = 2;
+//     string refresh_token = 3;
+//     int64 access_expires_at = 4;
+//     int64 refresh_expires_at = 5;
+// }
+
+// message RefreshResponse {
+//     string access_token = 1;
+//     int64 access_expires_at = 2;
+// }
+
+// message ForgotPasswordResponse {
+//     bool email_sent = 1;
+// }
