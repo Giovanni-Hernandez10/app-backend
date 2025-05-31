@@ -4,11 +4,13 @@ import (
 	"context"
 
 	pb "github.com/Giovanni-Hernandez10/app-backend/auth-service/proto/authpb"
+	"github.com/jackc/pgx/v5"
 )
 
 // embedding the struct from proto code to create the grpc functions that it has associated with it
 type AuthServer struct {
 	pb.UnimplementedAuthServiceServer
+	DB *pgx.Conn // the database connection to use it within grpc functions
 }
 
 // signup request logic
