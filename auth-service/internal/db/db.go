@@ -10,9 +10,9 @@ import (
 
 // connect to postgresql through supabase - returns a connection and error
 func Connect() (*pgx.Conn, error) {
-	db_url := os.Getenv("DATABASE_URL")
 
 	// connecting to the database
+	db_url := os.Getenv("DATABASE_URL")
 	conn, err := pgx.Connect(context.Background(), db_url)
 
 	if err != nil {
