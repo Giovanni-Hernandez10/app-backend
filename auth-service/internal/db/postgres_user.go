@@ -41,7 +41,7 @@ func (store *PostgresUserStore) GetUserByEmail(ctx context.Context, user *models
 	// sending the query to the DB
 	row, err1 := store.DB.Query(ctx, query, args)
 	if err1 != nil {
-		return nil, fmt.Errorf("Unable to query user by email; %w", err)
+		return nil, fmt.Errorf("unable to query user by email: %w", err1)
 	}
 
 	defer row.Close()
