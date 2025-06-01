@@ -25,7 +25,7 @@ func (store *PostgresUserStore) CreateUser(ctx context.Context, user *models.Use
 	// executing the query
 	_, err := store.DB.Exec(ctx, query, args)
 	if err != nil {
-		return fmt.Errorf("Unable to insert row: %w", err)
+		return fmt.Errorf("unable to insert row: %w", err)
 	}
 
 	return nil
