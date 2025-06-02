@@ -6,7 +6,6 @@ import (
 
 	"github.com/Giovanni-Hernandez10/app-backend/auth-service/internal/db"
 	pb "github.com/Giovanni-Hernandez10/app-backend/auth-service/proto/authpb"
-	"github.com/jackc/pgx/v5"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -14,7 +13,6 @@ import (
 // embedding the struct from proto code to create the grpc functions that it has associated with it
 type AuthServer struct {
 	pb.UnimplementedAuthServiceServer
-	DB    *pgx.Conn // the database connection to use it within grpc functions
 	Store db.PostgresUserStore
 }
 
@@ -33,6 +31,7 @@ func (authServer *AuthServer) Signup(ctx context.Context, req *pb.SignupRequest)
 
 	user_email := req.GetEmail()
 	user_password := req.GetPassword()
+	confirm_password := req.GetConfirmPassword()
 
 	// input validation checks
 	if user_email == "" || user_password == "" {
@@ -41,6 +40,10 @@ func (authServer *AuthServer) Signup(ctx context.Context, req *pb.SignupRequest)
 
 	if len(user_password) < 8 {
 		return nil, status.Errorf(codes.InvalidArgument, "Password needs to be at least 8 characters long")
+	}
+
+	if user_password != confirm_password {
+		return nil, status.Errorf(codes.InvalidArgument, "Passwords don't match")
 	}
 
 	if !strings.Contains(user_email, "@") {
@@ -67,22 +70,22 @@ func (authServer *AuthServer) Signup(ctx context.Context, req *pb.SignupRequest)
 	}, nil
 }
 
-// login request logic
-func (authServer *AuthServer) Login(context.Context, *pb.LoginRequest) (*pb.LoginResponse, error) {
+// // login request logic
+// func (authServer *AuthServer) Login(context.Context, *pb.LoginRequest) (*pb.LoginResponse, error) {
 
-}
+// }
 
-// refresh request logic
-func (authServer *AuthServer) Refresh(context.Context, *pb.RefreshRequest) (*pb.RefreshResponse, error) {
+// // refresh request logic
+// func (authServer *AuthServer) Refresh(context.Context, *pb.RefreshRequest) (*pb.RefreshResponse, error) {
 
-}
+// }
 
-// logout request logic
-func (authServer *AuthServer) Logout(context.Context, *pb.LogoutRequest) (*pb.AuthResponse, error) {
+// // logout request logic
+// func (authServer *AuthServer) Logout(context.Context, *pb.LogoutRequest) (*pb.AuthResponse, error) {
 
-}
+// }
 
-// forgot password request logic
-func (authServer *AuthServer) ForgotPassword(context.Context, *pb.ForgotPasswordRequest) (*pb.ForgotPasswordResponse, error) {
+// // forgot password request logic
+// func (authServer *AuthServer) ForgotPassword(context.Context, *pb.ForgotPasswordRequest) (*pb.ForgotPasswordResponse, error) {
 
-}
+// }
