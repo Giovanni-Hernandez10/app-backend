@@ -20,5 +20,9 @@ func main() {
 		log.Fatalf("There was an error connecting to the database: %v", err)
 	}
 
+	UserStore := &db.PostgresUserStore{
+		DB: conn,
+	}
+
 	defer conn.Close(context.Background())
 }
